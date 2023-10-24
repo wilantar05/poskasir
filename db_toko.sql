@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2023 at 11:48 AM
+-- Generation Time: Oct 24, 2023 at 05:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -46,9 +46,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id`, `id_barang`, `id_kategori`, `nama_barang`, `merk`, `harga_beli`, `harga_jual`, `satuan_barang`, `stok`, `tgl_input`, `tgl_update`) VALUES
-(1, 'BR001', 1, 'Pensil', 'Fabel Castel', '1500', '3000', 'PCS', '98', '6 October 2020, 0:41', NULL),
-(2, 'BR002', 5, 'Sabun', 'Lifeboy', '1800', '3000', 'PCS', '38', '6 October 2020, 0:41', '6 October 2020, 0:54'),
-(3, 'BR003', 1, 'Pulpen', 'Standard', '1500', '2000', 'PCS', '69', '6 October 2020, 1:34', NULL);
+(4, 'BR001', 8, 'Sandal Hak Tali Jepit Hitam', 'Hari', '100000', '125000', 'PCS', '10', '24 October 2023, 20:44', NULL),
+(5, 'BR002', 9, 'Sandal Flat Tali Silang Coklat', 'Hari', '120000', '150000', 'PCS', '9', '24 October 2023, 20:45', '24 October 2023, 22:24');
 
 -- --------------------------------------------------------
 
@@ -67,10 +66,8 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `tgl_input`) VALUES
-(1, 'ATK', '7 May 2017, 10:23'),
-(5, 'Sabun', '7 May 2017, 10:28'),
-(6, 'Snack', '6 October 2020, 0:19'),
-(7, 'Minuman', '6 October 2020, 0:20');
+(8, 'Sandal Hak', '24 October 2023, 20:44'),
+(9, 'Sandal Flat', '24 October 2023, 20:44');
 
 -- --------------------------------------------------------
 
@@ -139,7 +136,8 @@ CREATE TABLE `nota` (
 --
 
 INSERT INTO `nota` (`id_nota`, `id_barang`, `id_member`, `jumlah`, `total`, `tanggal_input`, `periode`) VALUES
-(1, 'BR003', 1, '1', '2000', '23 October 2023, 15:18', '10-2023');
+(3, 'BR001', 1, '2', '250000', '24 October 2023, 20:45', '10-2023'),
+(4, 'BR002', 1, '3', '450000', '24 October 2023, 20:46', '10-2023');
 
 -- --------------------------------------------------------
 
@@ -231,13 +229,13 @@ ALTER TABLE `toko`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -255,13 +253,13 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `nota`
 --
 ALTER TABLE `nota`
-  MODIFY `id_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_penjualan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `toko`
