@@ -9,7 +9,7 @@
             <div class="copyright text-center my-auto">
                 <span>
                     <?php echo date('Y');?> - Sistem Kasir |
-                    BY <b><a href="https://codekop.com" target="_blank">Krishna Will</a></b>
+                    BY <b><a href="https://www.instagram.com/kw.ish" target="_blank">Krishna Will</a></b>
                 </span>
             </div>
         </div>
