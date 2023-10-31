@@ -23,36 +23,57 @@
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4">
 					<center>
-						<p><?php echo $toko['nama_toko'].", ".$toko['alamat_toko'];?></p>
+						<p><?php echo $toko['nama_toko'];?>
+						<br/><?php echo $toko['alamat_toko'];?>
+						<br/><?php 
+						$date = new DateTime("now", new DateTimeZone('Singapore') );
+						echo $date->format("d-m-Y, H:i:s");?>
+						<br/>============================
+						</p>
 					</center>
 					<table class="table table-bordered" style="width:100%;">
-						<tr>
-							<td>Barang</td>
-							<td>Qty</td>
-							<td>Total</td>
-						</tr>
 						<?php $no=1; foreach($hsl as $isi){?>
 						<tr>
 							<td><?php echo $isi['nama_barang'];?></td>
-							<td><?php echo $isi['jumlah'];?></td>
-							<td><?php echo $isi['total'];?></td>
+						</tr>
+						<tr>
+							<td>
+								<?php echo $isi['jumlah']. " x ".number_format($isi['harga_jual']);?>
+							</td>
+							
+							<td><?php echo number_format($isi['total']);?></td>
 						</tr>
 						<?php $no++; }?>
+						
 					</table>
-					<div class="pull-right">
-						<?php $hasil = $lihat -> jumlah(); ?>
-						<br/>
-						Total : Rp.<?php echo number_format($hasil['bayar']);?>
-						<br/>
-						Diskon : Rp.<?php echo number_format(htmlentities($_GET['diskon']));?>
-						<br/>
-						Bayar : Rp.<?php echo number_format(htmlentities($_GET['bayar']));?>
-						<br/>
-						Kembali : Rp.<?php echo number_format(htmlentities($_GET['kembali']));?>
-					</div>
+					<br/>============================
+					<table class="table table-bordered" style="width:100%;" align="right">
+					<?php $hasil = $lihat -> jumlah(); ?>
+							<tr>
+								<td>Sub-Total</td>
+								<td>Rp. <?php echo number_format(htmlentities($_GET['total']));?></td>
+							</tr>
+							<tr>
+								<td>Diskon</td>
+								<td>Rp. <?php echo number_format(htmlentities($_GET['diskon']));?></td>
+							</tr>
+							<tr>
+								<td>Total</td>
+								<td>Rp. <?php echo number_format(htmlentities($_GET['total']-$_GET['diskon']));?></td>
+							</tr>
+							<tr>
+								<td>Bayar</td>
+								<td>Rp. <?php echo number_format(htmlentities($_GET['bayar']));?></td>
+							</tr>
+							<tr>
+								<td>Kembali</td>
+								<td>Rp. <?php echo number_format(htmlentities($_GET['kembali']));?></td>
+							</tr>
+					</table>
+
 					<div class="clearfix"></div>
 					<center>
-						<p>Terima Kasih Telah berbelanja di toko kami !</p>
+						<p>Terima Kasih!</p>
 					</center>
 				</div>
 				<div class="col-sm-4"></div>

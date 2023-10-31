@@ -194,7 +194,7 @@
 								
 								<td>
 									<a href="print.php?nm_member=<?php echo $_SESSION['admin']['nm_member'];?>
-									&bayar=<?php echo $bayar;?>&kembali=<?php echo $hitung;?> &diskon=<?php echo $diskon;?>" target="_blank">
+									&bayar=<?php echo $bayar;?>&kembali=<?php echo $hitung;?> &diskon=<?php echo $diskon;?> &total=<?php echo $total_bayar;?>" target="_blank">
 									<button class="btn btn-secondary">
 										<i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
 									</button></a>
