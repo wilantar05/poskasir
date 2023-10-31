@@ -148,6 +148,7 @@
 								<th style="width:10%;"> Total</th>
 								<th> Kasir</th>
 								<th> Tanggal Input</th>
+								<th> Metode</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -173,10 +174,17 @@
 								$bayar = 0;
 								$jumlah = 0;
 								$modal = 0;
+								$totalTunai = 0;
+								$totalNon = 0;
 								foreach($hasil as $isi){ 
 									$bayar += $isi['total'];
 									$modal += $isi['harga_beli']* $isi['jumlah'];
 									$jumlah += $isi['jumlah'];
+									if($isi['metode']=="Tunai"){
+										$totalTunai += $isi['total'];
+									}else{
+										$totalNon += $isi['total'];
+									}
 							?>
 							<tr>
 								<td><?php echo $no;?></td>
@@ -187,6 +195,7 @@
 								<td>Rp.<?php echo number_format($isi['total']);?>,-</td>
 								<td><?php echo $isi['nm_member'];?></td>
 								<td><?php echo $isi['tanggal_input'];?></td>
+								<td><?php echo $isi['metode'];?></td>
 							</tr>
 							<?php $no++; }?>
 						</tbody>
@@ -199,6 +208,21 @@
 								<th style="background:#0bb365;color:#fff;">Keuntungan</th>
 								<th style="background:#0bb365;color:#fff;">
 									Rp.<?php echo number_format($bayar-$modal);?>,-</th>
+									<th></th>
+							</tr>
+							<tr>
+								<th colspan="5">Total Tunai</td>
+								<th>Rp.<?php echo number_format($totalTunai);?>,-</th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
+								<th colspan="5">Total Non-Tunai</td>
+								<th>Rp.<?php echo number_format($totalNon);?>,-</th>
+								<th></th>
+								<th></th>
+								<th></th>
 							</tr>
 						</tfoot>
 					</table>

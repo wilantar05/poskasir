@@ -13,7 +13,7 @@
 ?>
 <html>
 	<head>
-		<title>print</title>
+		<title>Struk</title>
 		<link rel="stylesheet" href="assets/css/bootstrap.css">
 	</head>
 	<body>
@@ -23,21 +23,16 @@
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4">
 					<center>
-						<p><?php echo $toko['nama_toko'];?></p>
-						<p><?php echo $toko['alamat_toko'];?></p>
-						<p>Tanggal : <?php  echo date("j F Y, G:i");?></p>
-						<p>Kasir : <?php  echo htmlentities($_GET['nm_member']);?></p>
+						<p><?php echo $toko['nama_toko'].", ".$toko['alamat_toko'];?></p>
 					</center>
 					<table class="table table-bordered" style="width:100%;">
 						<tr>
-							<td>No.</td>
 							<td>Barang</td>
-							<td>Jumlah</td>
+							<td>Qty</td>
 							<td>Total</td>
 						</tr>
 						<?php $no=1; foreach($hsl as $isi){?>
 						<tr>
-							<td><?php echo $no;?></td>
 							<td><?php echo $isi['nama_barang'];?></td>
 							<td><?php echo $isi['jumlah'];?></td>
 							<td><?php echo $isi['total'];?></td>
@@ -46,11 +41,14 @@
 					</table>
 					<div class="pull-right">
 						<?php $hasil = $lihat -> jumlah(); ?>
-						Total : Rp.<?php echo number_format($hasil['bayar']);?>,-
 						<br/>
-						Bayar : Rp.<?php echo number_format(htmlentities($_GET['bayar']));?>,-
+						Total : Rp.<?php echo number_format($hasil['bayar']);?>
 						<br/>
-						Kembali : Rp.<?php echo number_format(htmlentities($_GET['kembali']));?>,-
+						Diskon : Rp.<?php echo number_format(htmlentities($_GET['diskon']));?>
+						<br/>
+						Bayar : Rp.<?php echo number_format(htmlentities($_GET['bayar']));?>
+						<br/>
+						Kembali : Rp.<?php echo number_format(htmlentities($_GET['kembali']));?>
 					</div>
 					<div class="clearfix"></div>
 					<center>

@@ -108,7 +108,8 @@
 							<?php
 							// proses bayar dan ke nota
 							if(!empty($_GET['nota'] == 'yes')) {
-								$total = $_POST['total'];
+								$diskon = $_POST['diskon'] ? $_POST['diskon'] : 0;
+								$total = $_POST['total'] - $diskon;
 								$bayar = $_POST['bayar'];
 								if(!empty($bayar))
 								{
@@ -119,14 +120,15 @@
 										$id_member = $_POST['id_member'];
 										$jumlah = $_POST['jumlah'];
 										$total = $_POST['total1'];
+										$metode = $_POST['metode'];
 										$tgl_input = $_POST['tgl_input'];
 										$periode = $_POST['periode'];
 										$jumlah_dipilih = count($id_barang);
 										
 										for($x=0;$x<$jumlah_dipilih;$x++){
 
-											$d = array($id_barang[$x],$id_member[$x],$jumlah[$x],$total[$x],$tgl_input[$x],$periode[$x]);
-											$sql = "INSERT INTO nota (id_barang,id_member,jumlah,total,tanggal_input,periode) VALUES(?,?,?,?,?,?)";
+											$d = array($id_barang[$x],$id_member[$x],$jumlah[$x],$total[$x],$metode,$tgl_input[$x],$periode[$x]);
+											$sql = "INSERT INTO nota (id_barang,id_member,jumlah,total,metode,tanggal_input,periode) VALUES(?,?,?,?,?,?,?)";
 											$row = $config->prepare($sql);
 											$row->execute($d);
 
@@ -163,11 +165,22 @@
 									<input type="hidden" name="periode[]" value="<?php echo date('m-Y');?>">
 								<?php $no++; }?>
 								<tr>
-									<td>Total Semua  </td>
+									<td>Total Semua</td>
 									<td><input type="text" class="form-control" name="total" value="<?php echo $total_bayar;?>"></td>
-								
-									<td>Bayar  </td>
-									<td><input type="text" class="form-control" name="bayar" value="<?php echo $bayar;?>"></td>
+									<td>Diskon</td>
+									<td><input type="text" id="diskon" class="form-control" name="diskon" value="<?php echo $diskon;?>"></td>
+								</tr>
+								<tr>
+									
+									<td>Metode  </td>
+									<td>
+									<input type="radio" id="Tunai" name="metode" value="Tunai" checked = "checked">
+									<label for="Tunai">Tunai</label><br>
+									<input type="radio" id="Non-Tunai" name="metode" value="Non-Tunai">
+									<label for="Non-Tunai">Non-Tunai</label><br>
+									</td>
+									<td>Nominal</td>
+									<td><input type="text" id="inputTunai" class="form-control" name="bayar" value="<?php echo $bayar;?>"></td>
 									<td><button class="btn btn-success"><i class="fa fa-shopping-cart"></i> Bayar</button>
 									<?php  if(!empty($_GET['nota'] == 'yes')) {?>
 										<a class="btn btn-danger" href="fungsi/hapus/hapus.php?penjualan=jual">
@@ -178,10 +191,10 @@
 							<tr>
 								<td>Kembali</td>
 								<td><input type="text" class="form-control" value="<?php echo $hitung;?>"></td>
-								<td></td>
+								
 								<td>
 									<a href="print.php?nm_member=<?php echo $_SESSION['admin']['nm_member'];?>
-									&bayar=<?php echo $bayar;?>&kembali=<?php echo $hitung;?>" target="_blank">
+									&bayar=<?php echo $bayar;?>&kembali=<?php echo $hitung;?> &diskon=<?php echo $diskon;?>" target="_blank">
 									<button class="btn btn-secondary">
 										<i class="fa fa-print"></i> Print Untuk Bukti Pembayaran
 									</button></a>
