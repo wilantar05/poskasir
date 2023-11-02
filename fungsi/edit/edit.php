@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!empty($_SESSION['admin'])) {
+if (!empty($_SESSION['admin']) || !empty($_SESSION['kasir'])) {
     require '../../config.php';
     if (!empty($_GET['pengaturan'])) {
         $nama= htmlentities($_POST['namatoko']);

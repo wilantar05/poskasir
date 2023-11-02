@@ -1,7 +1,7 @@
 <?php 
 	@ob_start();
 	session_start();
-	if(!empty($_SESSION['admin'])){ }else{
+	if(!empty($_SESSION['admin']) || !empty($_SESSION['kasir'])){ }else{
 		echo '<script>window.location="login.php";</script>';
         exit;
 	}

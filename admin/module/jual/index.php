@@ -4,7 +4,7 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-<?php 
+	  <?php 
 	$id = $_SESSION['admin']['id_member'];
 	$hasil = $lihat -> member_edit($id);
 ?>
@@ -111,6 +111,17 @@
 								$diskon = $_POST['diskon'] ? $_POST['diskon'] : 0;
 								$total = $_POST['total'] - $diskon;
 								$bayar = $_POST['bayar'];
+								$metode = $_POST['metode'];
+
+								if($diskon>0){
+									$tgl = date("j F Y, G:i");
+									$period = date("m-Y");
+									$d = array($diskon,$metode,$tgl,$period);
+									$sql = "INSERT INTO diskon (diskon,metode,tgl_input,periode) VALUES(?,?,?,?)";
+									$row = $config->prepare($sql);
+									$row->execute($d);
+								}
+
 								if(!empty($bayar))
 								{
 									$hitung = $bayar - $total;
@@ -120,11 +131,10 @@
 										$id_member = $_POST['id_member'];
 										$jumlah = $_POST['jumlah'];
 										$total = $_POST['total1'];
-										$metode = $_POST['metode'];
+										//$metode = $_POST['metode'];
 										$tgl_input = $_POST['tgl_input'];
 										$periode = $_POST['periode'];
 										$jumlah_dipilih = count($id_barang);
-										
 										for($x=0;$x<$jumlah_dipilih;$x++){
 
 											$d = array($id_barang[$x],$id_member[$x],$jumlah[$x],$total[$x],$metode,$tgl_input[$x],$periode[$x]);

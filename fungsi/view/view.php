@@ -183,6 +183,17 @@ class view
         return $hasil;
     }
 
+    public function diskon()
+    {
+        $sql ="SELECT * from diskon 
+                where periode = ?
+                ORDER BY id_diskon DESC";
+        $row = $this-> db -> prepare($sql);
+        $row -> execute(array(date('m-Y')));
+        $hasil = $row -> fetchAll();
+        return $hasil;
+    }
+
     public function periode_jual($periode)
     {
         $sql ="SELECT nota.* , barang.id_barang, barang.nama_barang, barang.harga_beli, member.id_member,
@@ -216,6 +227,40 @@ class view
                 ORDER BY id_nota ASC";
         $row = $this-> db -> prepare($sql);
         $row -> execute(array($param));
+        $hasil = $row -> fetchAll();
+        return $hasil;
+    }
+
+    public function diskon_hari($hari)
+    {
+        $ex = explode('-', $hari);
+        $monthNum  = $ex[1];
+        $monthName = date('F', mktime(0, 0, 0, $monthNum, 10));
+        if ($ex[2] > 9) {
+            $tgl = $ex[2];
+        } else {
+            $tgl1 = explode('0', $ex[2]);
+            $tgl = $tgl1[1];
+        }
+
+        $cek = $tgl.' '.$monthName.' '.$ex[0];
+        $param = "%{$cek}%";
+        $sql ="SELECT * from diskon 
+                WHERE  tgl_input LIKE ? 
+                ORDER BY id_diskon ASC";
+        $row = $this-> db -> prepare($sql);
+        $row -> execute(array($param));
+        $hasil = $row -> fetchAll();
+        return $hasil;
+    }
+
+    public function periode_diskon($periode)
+    {
+        $sql ="SELECT * from diskon 
+                WHERE periode = ? 
+                ORDER BY id_diskon ASC";
+        $row = $this-> db -> prepare($sql);
+        $row -> execute(array($periode));
         $hasil = $row -> fetchAll();
         return $hasil;
     }

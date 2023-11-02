@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if (!empty($_SESSION['admin'])) {
+if (!empty($_SESSION['admin']) || !empty($_SESSION['kasir'])) {
     require '../../config.php';
     if (!empty(htmlentities($_GET['kategori']))) {
         $id= htmlentities($_GET['id']);
@@ -27,7 +27,6 @@ if (!empty($_SESSION['admin'])) {
         $rowI = $config -> prepare($sqlI);
         $rowI -> execute($dataI);
         $hasil = $rowI -> fetch();
-
         /*$jml = htmlentities($_GET['jml']) + $hasil['stok'];
 
         $dataU[] = $jml;
@@ -49,6 +48,7 @@ if (!empty($_SESSION['admin'])) {
         $row = $config -> prepare($sql);
         $row -> execute();
         echo '<script>window.location="../../index.php?page=jual"</script>';
+        
     }
     
     if (!empty(htmlentities($_GET['laporan']))) {

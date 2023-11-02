@@ -39,9 +39,9 @@
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="index.php?page=laporan">
+        <a class="nav-link" href="index.php?page=barang">
         <i class="fas fa-fw fa-database"></i>
-            <span>Laporan Penjualan</span></a>
+            <span>Stock Barang</span></a>
     </li>
     <!-- Heading -->
     <!-- <div class="sidebar-heading">

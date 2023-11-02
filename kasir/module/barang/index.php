@@ -31,10 +31,6 @@
 			}
 		?>
         <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-primary btn-md mr-2" data-toggle="modal" data-target="#myModal">
-            <i class="fa fa-plus"></i> Insert Data</button>
-        <a href="index.php?page=barang&stok=yes" class="btn btn-warning btn-md mr-2">
-            <i class="fa fa-list"></i> Sortir Stok Kurang</a>
         <a href="index.php?page=barang" class="btn btn-success btn-md">
             <i class="fa fa-refresh"></i> Refresh Data</a>
         <div class="clearfix"></div>
@@ -54,7 +50,6 @@
                             <th>Harga Beli</th>
                             <th>Harga Jual</th>
                             <th>Satuan</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,29 +83,6 @@
                             <td>Rp.<?php echo number_format($isi['harga_beli']);?>,-</td>
                             <td>Rp.<?php echo number_format($isi['harga_jual']);?>,-</td>
                             <td> <?php echo $isi['satuan_barang'];?></td>
-                            <td>
-                                <?php if($isi['stok'] <=  '3'){?>
-                                <form method="POST" action="fungsi/edit/edit.php?stok=edit">
-                                    <input type="text" name="restok" class="form-control">
-                                    <input type="hidden" name="id" value="<?php echo $isi['id_barang'];?>"
-                                        class="form-control">
-                                    <button class="btn btn-primary btn-sm">
-                                        Restok
-                                    </button>
-                                    <a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>"
-                                        onclick="javascript:return confirm('Hapus Data barang ?');">
-                                        <button class="btn btn-danger btn-sm">Hapus</button></a>
-                                </form>
-                                <?php }else{?>
-                                <a href="index.php?page=barang/details&barang=<?php echo $isi['id_barang'];?>"><button
-                                        class="btn btn-primary btn-xs">Details</button></a>
-
-                                <a href="index.php?page=barang/edit&barang=<?php echo $isi['id_barang'];?>"><button
-                                        class="btn btn-warning btn-xs">Edit</button></a>
-                                <a href="fungsi/hapus/hapus.php?barang=hapus&id=<?php echo $isi['id_barang'];?>"
-                                    onclick="javascript:return confirm('Hapus Data barang ?');"><button
-                                        class="btn btn-danger btn-xs">Hapus</button></a>
-                                <?php }?>
                         </tr>
                         <?php 
 							$no++; 

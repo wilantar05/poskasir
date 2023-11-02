@@ -160,14 +160,17 @@
 									$jumlah = 0;
 									$bayar = 0;
 									$hasil = $lihat -> periode_jual($periode);
+									$hasilDiskon = $lihat -> periode_diskon($periode);
 								}elseif(!empty($_GET['hari'])){
 									$hari = $_POST['hari'];
 									$no=1; 
 									$jumlah = 0;
 									$bayar = 0;
 									$hasil = $lihat -> hari_jual($hari);
+									$hasilDiskon = $lihat -> diskon_hari($hari);
 								}else{
 									$hasil = $lihat -> jual();
+									$hasilDiskon = $lihat -> diskon();
 								}
 							?>
 							<?php 
@@ -176,6 +179,18 @@
 								$modal = 0;
 								$totalTunai = 0;
 								$totalNon = 0;
+								$totalDisc = 0;
+								$discTunai = 0;
+								$discNon = 0;
+								foreach($hasilDiskon as $isiDisc){
+									$totalDisc += $isiDisc['diskon'];
+									if($isiDisc['metode'] == "Tunai"){
+										$discTunai += $isiDisc['diskon'];
+									}else{
+										$discNon += $isiDisc['diskon'];
+									}
+								}
+								
 								foreach($hasil as $isi){ 
 									$bayar += $isi['total'];
 									$modal += $isi['harga_beli']* $isi['jumlah'];
@@ -185,6 +200,8 @@
 									}else{
 										$totalNon += $isi['total'];
 									}
+									
+
 							?>
 							<tr>
 								<td><?php echo $no;?></td>
@@ -200,29 +217,45 @@
 							<?php $no++; }?>
 						</tbody>
 						<tfoot>
+							
 							<tr>
 								<th colspan="3">Total Terjual</td>
 								<th><?php echo $jumlah;?></td>
 								<th>Rp.<?php echo number_format($modal);?>,-</th>
 								<th>Rp.<?php echo number_format($bayar);?>,-</th>
-								<th style="background:#0bb365;color:#fff;">Keuntungan</th>
-								<th style="background:#0bb365;color:#fff;">
-									Rp.<?php echo number_format($bayar-$modal);?>,-</th>
+								<th></th>
+								<th>
+									</th>
 									<th></th>
 							</tr>
 							<tr>
+								<th colspan="5">Total Diskon</td>
+								<th>Rp.<?php echo number_format($totalDisc);?>,-</th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+							<tr>
 								<th colspan="5">Total Tunai</td>
-								<th>Rp.<?php echo number_format($totalTunai);?>,-</th>
+								<th>Rp.<?php echo number_format($totalTunai-$discTunai);?>,-</th>
 								<th></th>
 								<th></th>
 								<th></th>
 							</tr>
 							<tr>
 								<th colspan="5">Total Non-Tunai</td>
-								<th>Rp.<?php echo number_format($totalNon);?>,-</th>
+								<th>Rp.<?php echo number_format($totalNon-$discNon);?>,-</th>
 								<th></th>
 								<th></th>
 								<th></th>
+							</tr>
+							<tr>
+								<th colspan="5" style="background:#0bb365;color:#fff;">Keuntungan</td>
+								<th style="background:#0bb365;color:#fff;">
+									Rp.<?php echo number_format($bayar-$modal-$totalDisc);?>,-</th>
+									<th></th>
+								<th></th>
+								<th></th>	
 							</tr>
 						</tfoot>
 					</table>
